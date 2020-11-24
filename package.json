@@ -1,5 +1,5 @@
 {
-	"name": "template-repos-ts-sol",
+	"name": "@devprtcl/util-contracts",
 	"version": "1.0.0",
 	"description": "Template repository for using TypeScript and Solidity",
 	"main": "index.js",
@@ -19,10 +19,13 @@
 		"prebuild": "yarn generate",
 		"clean": "rimraf scripts/**/*.js build"
 	},
+	"files": [
+		"contracts/access",
+		"contracts/storage"
+	],
 	"author": "",
 	"license": "MPL-2.0",
 	"devDependencies": {
-		"@openzeppelin/contracts": "3.2.0",
 		"@types/chai": "4.2.14",
 		"@types/dotenv": "8.2.0",
 		"@types/mocha": "8.0.4",
@@ -42,7 +45,8 @@
 		"prettier-plugin-solidity": "1.0.0-beta.1",
 		"rimraf": "3.0.2",
 		"ts-node": "9.0.0",
-		"typescript": "4.1.2"
+		"typescript": "4.1.2",
+		"solhint": "^3.3.1"
 	},
 	"husky": {
 		"hooks": {
@@ -50,6 +54,6 @@
 		}
 	},
 	"dependencies": {
-		"solhint": "^3.3.1"
+		"@openzeppelin/contracts": "3.2.0"
 	}
 }

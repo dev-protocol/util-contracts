@@ -1,6 +1,6 @@
-# template-repos-ts-sol
+# @devprtcl/util-contracts
 
-Template repository for using TypeScript and Solidity
+this is Solidity utils contracts
 
 # Usage
 
