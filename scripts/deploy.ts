@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/prefer-readonly-parameter-types */
-import {ethers, providers} from 'ethers'
+import { ethers, providers } from 'ethers'
 import Provider = providers.Provider
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

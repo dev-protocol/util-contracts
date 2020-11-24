@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MPL-2.0
 
-pragma solidity 0.6.12;
+pragma solidity >=0.6.12;
 
 import {Admin} from "contracts/access/Admin.sol";
 import {EternalStorage} from "contracts/storage/EternalStorage.sol";
