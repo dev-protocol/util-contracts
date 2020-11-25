@@ -2,8 +2,8 @@
 
 pragma solidity >=0.6.12;
 
-import {Admin} from "contracts/access/Admin.sol";
-import {EternalStorage} from "contracts/storage/EternalStorage.sol";
+import {Admin} from "../access/Admin.sol";
+import {EternalStorage} from "./EternalStorage.sol";
 
 /**
  * Module for contrast handling EternalStorage.
