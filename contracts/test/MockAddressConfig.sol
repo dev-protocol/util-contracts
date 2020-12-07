@@ -9,6 +9,7 @@ contract MockAddressConfig {
 	function setToken(address _token) external {
 		token = _token;
 	}
+
 	function setWithdraw(address _withdraw) external {
 		withdraw = _withdraw;
 	}
