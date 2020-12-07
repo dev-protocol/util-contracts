@@ -54,6 +54,7 @@
 		}
 	},
 	"dependencies": {
-		"@openzeppelin/contracts": "3.3.0"
+		"@devprtcl/protocol": "^3.0.3",
+		"@openzeppelin/contracts": "^3.3.0"
 	}
 }
