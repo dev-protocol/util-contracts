@@ -19,7 +19,11 @@ contract Treasury is Ownable {
 		IWithdraw(config.withdraw()).withdraw(_property);
 	}
 
-	function transferProperty(address _property, address _nextTreasury) external onlyOwner returns (bool) {
+	function transferProperty(address _property, address _nextTreasury)
+		external
+		onlyOwner
+		returns (bool)
+	{
 		IERC20 property = IERC20(_property);
 		uint256 balance = property.balanceOf(address(this));
 		return property.transfer(_nextTreasury, balance);
