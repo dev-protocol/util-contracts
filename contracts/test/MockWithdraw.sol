@@ -5,7 +5,7 @@ pragma solidity 0.6.12;
 import {IAddressConfig} from "@devprtcl/protocol/contracts/interface/IAddressConfig.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract MockLWithdraw {
+contract MockWithdraw {
 	IAddressConfig private config;
 
 	constructor(address _config) public {
