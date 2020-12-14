@@ -1,5 +1,5 @@
 {
-	"name": "@devprtcl/util-contracts",
+	"name": "@devprotocol/util-contracts",
 	"version": "1.0.0",
 	"description": "Template repository for using TypeScript and Solidity",
 	"main": "index.js",
@@ -55,5 +55,16 @@
 	},
 	"dependencies": {
 		"@openzeppelin/contracts": "3.3.0"
-	}
+	},
+	"directories": {
+		"test": "test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dev-protocol/util-contracts.git"
+	},
+	"bugs": {
+		"url": "https://github.com/dev-protocol/util-contracts/issues"
+	},
+	"homepage": "https://github.com/dev-protocol/util-contracts#readme"
 }
