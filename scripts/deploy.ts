@@ -12,8 +12,7 @@ export type ContractDeployer = (
 
 const getDeployer = (
 	deployMnemonic?: string,
-	deployNetwork = 'local',
-	deployLocalUrl = 'http://127.0.0.1:8545'
+	deployNodeUrl = 'http://127.0.0.1:8545'
 ): ethers.Wallet => {
 	if (!deployMnemonic) {
 		throw new Error(
@@ -22,10 +21,7 @@ const getDeployer = (
 	}
 
 	// Connect provider
-	const provider: Provider =
-		deployNetwork === 'local'
-			? new ethers.providers.JsonRpcProvider(deployLocalUrl)
-			: ethers.getDefaultProvider(deployNetwork)
+	const provider: Provider = new ethers.providers.JsonRpcProvider(deployNodeUrl)
 
 	return ethers.Wallet.fromMnemonic(deployMnemonic).connect(provider)
 }
@@ -33,10 +29,9 @@ const getDeployer = (
 export const deploy = async (deployer: ContractDeployer): Promise<void> => {
 	const envs = config().parsed ?? {}
 	const mnemonic = envs.DEPLOY_MNEMONIC
-	const network = envs.DEPLOY_NETWORK
-	const deployLocalUrl = envs.DEPLOY_LOCAL_URL
-	const wallet = getDeployer(mnemonic, network, deployLocalUrl)
+	const node = envs.DEPLOY_NODE_URL
+	const wallet = getDeployer(mnemonic, node)
 
-	console.log(`Deploying to network [${network ?? 'local'}] in 5 seconds!`)
+	console.log(`Deploying to network [${node ?? 'local'}]`)
 	await deployer(wallet, ContractFactory, envs)
 }
