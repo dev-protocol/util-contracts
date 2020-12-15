@@ -1,10 +1,14 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/prefer-readonly-parameter-types */
-import { ethers, providers } from 'ethers'
+import { ethers, providers, ContractFactory } from 'ethers'
+import { config, DotenvParseOutput } from 'dotenv'
+import { Class } from 'type-fest'
 import Provider = providers.Provider
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const deployContracts = async (_wallet: ethers.Wallet): Promise<void> => {}
+export type ContractDeployer = (
+	_wallet: ethers.Wallet,
+	_factory: Class<ContractFactory>,
+	_envs: DotenvParseOutput
+) => Promise<void>
 
 const getDeployer = (
 	deployMnemonic?: string,
@@ -26,14 +30,13 @@ const getDeployer = (
 	return ethers.Wallet.fromMnemonic(deployMnemonic).connect(provider)
 }
 
-const deploy = async (): Promise<void> => {
-	const mnemonic = process.env.DEPLOY_MNEMONIC
-	const network = process.env.DEPLOY_NETWORK
-	const deployLocalUrl = process.env.DEPLOY_LOCAL_URL
+export const deploy = async (deployer: ContractDeployer): Promise<void> => {
+	const envs = config().parsed ?? {}
+	const mnemonic = envs.DEPLOY_MNEMONIC
+	const network = envs.DEPLOY_NETWORK
+	const deployLocalUrl = envs.DEPLOY_LOCAL_URL
 	const wallet = getDeployer(mnemonic, network, deployLocalUrl)
 
 	console.log(`Deploying to network [${network ?? 'local'}] in 5 seconds!`)
-	await deployContracts(wallet)
+	await deployer(wallet, ContractFactory, envs)
 }
-
-void deploy()
