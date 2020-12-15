@@ -1,4 +1,4 @@
-# @devprtcl/util-contracts
+# @devprotocol/util-contracts
 
 this is Solidity utils contracts
 

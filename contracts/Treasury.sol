@@ -3,10 +3,12 @@ pragma solidity >=0.6.12;
 
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {IWithdraw} from "@devprtcl/protocol/contracts/interface/IWithdraw.sol";
-import {IProperty} from "@devprtcl/protocol/contracts/interface/IProperty.sol";
 // prettier-ignore
-import {IAddressConfig} from "@devprtcl/protocol/contracts/interface/IAddressConfig.sol";
+import {IWithdraw} from "@devprotocol/protocol/contracts/interface/IWithdraw.sol";
+// prettier-ignore
+import {IProperty} from "@devprotocol/protocol/contracts/interface/IProperty.sol";
+// prettier-ignore
+import {IAddressConfig} from "@devprotocol/protocol/contracts/interface/IAddressConfig.sol";
 
 contract Treasury is Ownable {
 	IAddressConfig private config;
