@@ -4,11 +4,12 @@ pragma solidity >=0.6.12;
 
 import {Admin} from "../access/Admin.sol";
 import {EternalStorage} from "./EternalStorage.sol";
+import {IUsingStorage} from "./IUsingStorage.sol";
 
 /**
  * Module for contrast handling EternalStorage.
  */
-contract UsingStorage is Admin {
+contract UsingStorage is Admin, IUsingStorage {
 	address private _storage;
 	bytes32 public constant STORAGE_OWNER_ROLE =
 		keccak256("STORAGE_OWNER_ROLE");
@@ -19,19 +20,35 @@ contract UsingStorage is Admin {
 	}
 
 	modifier onlyStoargeOwner() {
-		require(isStorageOwner(_msgSender()), "storage owner only.");
+		require(
+			hasRole(STORAGE_OWNER_ROLE, _msgSender()),
+			"storage owner only."
+		);
 		_;
 	}
 
-	function isStorageOwner(address account) public view returns (bool) {
+	function isStorageOwner(address account)
+		external
+		view
+		override
+		returns (bool)
+	{
 		return hasRole(STORAGE_OWNER_ROLE, account);
 	}
 
-	function addStorageOwner(address _storageOwner) external onlyAdmin {
+	function addStorageOwner(address _storageOwner)
+		external
+		override
+		onlyAdmin
+	{
 		grantRole(STORAGE_OWNER_ROLE, _storageOwner);
 	}
 
-	function deleteStorageOwner(address _storageOwner) external onlyAdmin {
+	function deleteStorageOwner(address _storageOwner)
+		external
+		override
+		onlyAdmin
+	{
 		revokeRole(STORAGE_OWNER_ROLE, _storageOwner);
 	}
 
@@ -58,7 +75,13 @@ contract UsingStorage is Admin {
 	/**
 	 * Returns the set EternalStorage address.
 	 */
-	function getStorageAddress() external view hasStorage returns (address) {
+	function getStorageAddress()
+		external
+		view
+		override
+		hasStorage
+		returns (address)
+	{
 		return _storage;
 	}
 
@@ -67,7 +90,7 @@ contract UsingStorage is Admin {
 	 * This function call will fail if the EternalStorage contract is already set.
 	 * Also, only the storage owner can execute it.
 	 */
-	function createStorage() external onlyStoargeOwner {
+	function createStorage() external override onlyStoargeOwner {
 		require(_storage == address(0), "storage is set");
 		EternalStorage tmp = new EternalStorage();
 		_storage = address(tmp);
@@ -77,7 +100,11 @@ contract UsingStorage is Admin {
 	 * Assigns the EternalStorage contract that has already been created.
 	 * Only the storage owner can execute this function.
 	 */
-	function setStorage(address _storageAddress) external onlyStoargeOwner {
+	function setStorage(address _storageAddress)
+		external
+		override
+		onlyStoargeOwner
+	{
 		_storage = _storageAddress;
 	}
 
@@ -85,7 +112,7 @@ contract UsingStorage is Admin {
 	 * Delegates the owner of the current EternalStorage contract.
 	 * Only the storage owner can execute this function.
 	 */
-	function changeOwner(address newOwner) external onlyStoargeOwner {
+	function changeOwner(address newOwner) external override onlyStoargeOwner {
 		EternalStorage(_storage).changeOwner(newOwner);
 	}
 }
