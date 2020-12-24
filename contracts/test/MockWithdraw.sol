@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-pragma solidity 0.6.12;
+pragma solidity 0.7.6;
 
 // prettier-ignore
 import {IAddressConfig} from "@devprotocol/protocol/contracts/interface/IAddressConfig.sol";
@@ -8,7 +8,7 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract MockWithdraw {
 	IAddressConfig private config;
 
-	constructor(address _config) public {
+	constructor(address _config) {
 		config = IAddressConfig(_config);
 	}
 
