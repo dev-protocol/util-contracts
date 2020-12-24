@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-
-pragma solidity >=0.6.12;
+pragma solidity >=0.7.6;
 
 import {Admin} from "../access/Admin.sol";
 import {EternalStorage} from "./EternalStorage.sol";
@@ -14,7 +13,7 @@ contract UsingStorage is Admin, IUsingStorage {
 	bytes32 public constant STORAGE_OWNER_ROLE =
 		keccak256("STORAGE_OWNER_ROLE");
 
-	constructor() public {
+	constructor() {
 		_setRoleAdmin(STORAGE_OWNER_ROLE, DEFAULT_ADMIN_ROLE);
 		grantRole(STORAGE_OWNER_ROLE, _msgSender());
 	}

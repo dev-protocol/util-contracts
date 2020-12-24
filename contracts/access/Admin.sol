@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: MPL-2.0
-
-pragma solidity >=0.6.12;
+pragma solidity >=0.7.6;
 
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {IAdmin} from "./IAdmin.sol";
 
 abstract contract Admin is AccessControl, IAdmin {
-	constructor() public {
+	constructor() {
 		_setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
 	}
 
