@@ -8,15 +8,11 @@ contract Config is UsingStorage {
 		eternalStorage().setAddress(getAddressKey(_key), _value);
 	}
 
-	function get(string memory _key) external view returns(address){
+	function get(string memory _key) external view returns (address) {
 		return eternalStorage().getAddress(getAddressKey(_key));
 	}
 
-	function getAddressKey(string memory _key)
-		private
-		pure
-		returns (bytes32)
-	{
+	function getAddressKey(string memory _key) private pure returns (bytes32) {
 		return keccak256(abi.encodePacked("_address", _key));
 	}
 }
