@@ -18,6 +18,7 @@
 	},
 	"files": [
 		"contracts/access",
+		"contracts/config",
 		"contracts/storage"
 	],
 	"author": "",
