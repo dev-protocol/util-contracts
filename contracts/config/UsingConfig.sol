@@ -1,0 +1,32 @@
+// SPDX-License-Identifier: MPL-2.0
+pragma solidity >=0.7.6;
+
+import {IConfig} from "./IConfig.sol";
+
+/**
+ * Module for using AddressConfig contracts.
+ */
+contract UsingConfig {
+	address private _config;
+
+	/**
+	 * Initialize the argument as AddressConfig address.
+	 */
+	constructor(address _addressConfig) {
+		_config = _addressConfig;
+	}
+
+	/**
+	 * Returns the latest AddressConfig instance.
+	 */
+	function config() internal view returns (IConfig) {
+		return IConfig(_config);
+	}
+
+	/**
+	 * Returns the latest AddressConfig address.
+	 */
+	function configAddress() external view returns (address) {
+		return _config;
+	}
+}
