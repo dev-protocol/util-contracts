@@ -26,7 +26,7 @@ contract UsingConfig {
 	/**
 	 * Returns the latest AddressConfig address.
 	 */
-	function configAddress() external view returns (address) {
+	function configAddress() public view returns (address) {
 		return _config;
 	}
 }
