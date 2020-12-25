@@ -14,7 +14,7 @@ describe('Config', () => {
 			await config.createStorage()
 			await config.set('test', test.address)
 			const result = await config.get('test')
-			expect(result).to.be.equal(test)
+			expect(result).to.be.equal(test.address)
 		})
 		it('initial value is 0.', async () => {
 			const config = await deployContract(deployer, Config)
