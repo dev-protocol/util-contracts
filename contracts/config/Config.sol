@@ -4,19 +4,19 @@ pragma solidity >=0.7.6;
 import {UsingStorage} from "./../storage/UsingStorage.sol";
 
 contract Config is UsingStorage {
-	function set(string memory _key, address _value) external onlyAdmin {
+	function set(string memory _key, address _value) internal onlyAdmin {
 		eternalStorage().setAddress(getAddressKey(_key), _value);
 	}
 
-	function get(string memory _key) external view returns (address) {
+	function get(string memory _key) internal view returns (address) {
 		return eternalStorage().getAddress(getAddressKey(_key));
 	}
 
-	function setByteKey(bytes32 _key, address _value) external onlyAdmin {
+	function setByteKey(bytes32 _key, address _value) internal onlyAdmin {
 		eternalStorage().setAddress(_key, _value);
 	}
 
-	function getByteKey(bytes32 _key) external view returns (address) {
+	function getByteKey(bytes32 _key) internal view returns (address) {
 		return eternalStorage().getAddress(_key);
 	}
 
