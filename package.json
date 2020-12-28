@@ -1,6 +1,6 @@
 {
 	"name": "@devprotocol/util-contracts",
-	"version": "2.1.4",
+	"version": "2.1.5",
 	"description": "Template repository for using TypeScript and Solidity",
 	"main": "index.js",
 	"scripts": {
