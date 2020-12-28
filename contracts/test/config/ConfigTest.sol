@@ -12,7 +12,7 @@ contract ConfigTest is Config {
 		return get(_key);
 	}
 
-	function setByteKeyTest(bytes32 _key, address _value) external  {
+	function setByteKeyTest(bytes32 _key, address _value) external {
 		setByteKey(_key, _value);
 	}
 
