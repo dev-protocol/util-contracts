@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MPL-2.0
 pragma solidity >=0.7.6;
 
-import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {UsingStorage} from "./../storage/UsingStorage.sol";
 
-contract Config is UsingStorage, Ownable {
-	function set(string memory _key, address _value) external onlyOwner {
+contract Config is UsingStorage {
+	function set(string memory _key, address _value) external onlyAdmin {
 		eternalStorage().setAddress(getAddressKey(_key), _value);
 	}
 
@@ -13,7 +12,7 @@ contract Config is UsingStorage, Ownable {
 		return eternalStorage().getAddress(getAddressKey(_key));
 	}
 
-	function setByteKey(bytes32 _key, address _value) external onlyOwner {
+	function setByteKey(bytes32 _key, address _value) external onlyAdmin {
 		eternalStorage().setAddress(_key, _value);
 	}
 

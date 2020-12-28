@@ -21,7 +21,7 @@ describe('Config', () => {
 			await config.createStorage()
 			const userConfig = config.connect(user)
 			await expect(userConfig.set('test', test.address)).to.be.revertedWith(
-				'Ownable: caller is not the owner'
+				'admin only.'
 			)
 		})
 		it('initial value is 0.', async () => {
@@ -45,7 +45,7 @@ describe('Config', () => {
 			await config.createStorage()
 			const userConfig = config.connect(user)
 			await expect(userConfig.setByteKey(key, test.address)).to.be.revertedWith(
-				'Ownable: caller is not the owner'
+				'admin only.'
 			)
 		})
 		it('initial value is 0.', async () => {
