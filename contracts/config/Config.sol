@@ -13,6 +13,14 @@ contract Config is UsingStorage, Ownable {
 		return eternalStorage().getAddress(getAddressKey(_key));
 	}
 
+	function setByteKey(bytes32 _key, address _value) external onlyOwner {
+		eternalStorage().setAddress(_key, _value);
+	}
+
+	function getByteKey(bytes32 _key) external view returns (address) {
+		return eternalStorage().getAddress(_key);
+	}
+
 	function getAddressKey(string memory _key) private pure returns (bytes32) {
 		return keccak256(abi.encodePacked("_address", _key));
 	}
