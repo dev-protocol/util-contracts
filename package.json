@@ -53,7 +53,7 @@
 	},
 	"dependencies": {
 		"@devprotocol/protocol": "^3.0.3",
-		"@openzeppelin/contracts": "3.3.0"
+		"@openzeppelin/contracts": "3.4.0"
 	},
 	"directories": {
 		"test": "test"
