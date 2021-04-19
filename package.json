@@ -52,7 +52,7 @@
 		}
 	},
 	"dependencies": {
-		"@devprotocol/protocol": "^3.0.3",
+		"@devprotocol/protocol": "^3.0.4",
 		"@openzeppelin/contracts": "3.4.1"
 	},
 	"directories": {
