@@ -1,7 +1,7 @@
-import {expect, use} from 'chai'
-import {Contract} from 'ethers'
-import {deployContract, MockProvider, solidity} from 'ethereum-waffle'
-import {toBigNumber} from './lib/number'
+import { expect, use } from 'chai'
+import { Contract } from 'ethers'
+import { deployContract, MockProvider, solidity } from 'ethereum-waffle'
+import { toBigNumber } from './lib/number'
 import ConvertOnTransfer from '../build/ConvertOnTransfer.json'
 import MockDev from '../build/MockDev.json'
 
@@ -122,9 +122,9 @@ describe('ConvertOnTransfer', () => {
 			const [, convertOnTransfer, mockDev] = await init()
 			// 10000 DEV
 			const value = toBigNumber('10000000000000000000000')
-			await expect(convertOnTransfer.rescue(mockDev.address, user.address, value)).to.be.revertedWith(
-				'Ownable: caller is not the owner'
-			)
+			await expect(
+				convertOnTransfer.rescue(mockDev.address, user.address, value)
+			).to.be.revertedWith('Ownable: caller is not the owner')
 		})
 	})
 	describe('transfer,', () => {
@@ -219,7 +219,11 @@ describe('ConvertOnTransfer', () => {
 				(await mockDev.balanceOf(user2.address).then(toBigNumber)).toString()
 			).to.be.equal('0')
 			await convertOnTransfer.approve(user.address, value2)
-			await convertOnTransferUser.transferFrom(deployer.address, user2.address, value2)
+			await convertOnTransferUser.transferFrom(
+				deployer.address,
+				user2.address,
+				value2
+			)
 			expect(
 				(
 					await convertOnTransfer.balanceOf(deployer.address).then(toBigNumber)
@@ -251,9 +255,14 @@ describe('ConvertOnTransfer', () => {
 			// 100 COT
 			const value2 = toBigNumber('100000000000000000000')
 			await convertOnTransfer.approve(user.address, value2)
-			await convertOnTransferUser.transferFrom(deployer.address, user2.address, value2, {
-				gasLimit: 2000000,
-			})
+			await convertOnTransferUser.transferFrom(
+				deployer.address,
+				user2.address,
+				value2,
+				{
+					gasLimit: 2000000,
+				}
+			)
 			expect(
 				(
 					await convertOnTransfer.balanceOf(deployer.address).then(toBigNumber)
