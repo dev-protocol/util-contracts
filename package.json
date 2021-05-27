@@ -14,7 +14,8 @@
 		"lint:format": "prettier --write '**/*.{sol,ts,json,md,yml}'",
 		"build": "tsc -p tsconfig.build.json",
 		"prebuild": "yarn generate",
-		"clean": "rimraf scripts/**/*.js build"
+		"clean": "rimraf scripts/**/*.js build",
+		"prepare": "husky install"
 	},
 	"files": [
 		"contracts/access",
@@ -36,7 +37,7 @@
 		"eslint-config-xo": "0.36.0",
 		"eslint-config-xo-typescript": "0.38.0",
 		"ethereum-waffle": "3.3.0",
-		"husky": "6.0.0",
+		"husky": "^6.0.0",
 		"mocha": "8.4.0",
 		"prettier": "2.3.0",
 		"prettier-plugin-solidity": "1.0.0-beta.11",
@@ -45,11 +46,6 @@
 		"ts-node": "10.0.0",
 		"type-fest": "1.1.3",
 		"typescript": "4.3.2"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "yarn lint"
-		}
 	},
 	"dependencies": {
 		"@devprotocol/protocol": "^3.0.4",
