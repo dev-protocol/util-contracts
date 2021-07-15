@@ -35,7 +35,7 @@
 		"eslint": "7.30.0",
 		"eslint-config-prettier": "6.15.0",
 		"eslint-config-xo": "0.37.0",
-		"eslint-config-xo-typescript": "0.38.0",
+		"eslint-config-xo-typescript": "0.43.0",
 		"ethereum-waffle": "3.4.0",
 		"husky": "7.0.1",
 		"mocha": "9.0.2",
