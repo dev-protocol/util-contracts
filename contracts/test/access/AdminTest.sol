@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-pragma solidity 0.7.6;
+pragma solidity >=0.7.6;
 
 import {Admin} from "contracts/access/Admin.sol";
 

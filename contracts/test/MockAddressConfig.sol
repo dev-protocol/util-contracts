@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-pragma solidity 0.7.6;
+pragma solidity >=0.7.6;
 
 // The real AddressConfig contract does not inherit the interface, so the test mock will do so as well.
 contract MockAddressConfig {
