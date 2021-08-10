@@ -1,6 +1,6 @@
-import {expect, use} from 'chai'
-import {constants, utils} from 'ethers'
-import {deployContract, MockProvider, solidity} from 'ethereum-waffle'
+import { expect, use } from 'chai'
+import { constants, utils } from 'ethers'
+import { deployContract, MockProvider, solidity } from 'ethereum-waffle'
 import ConfigTest from '../../build/ConfigTest.json'
 
 use(solidity)
