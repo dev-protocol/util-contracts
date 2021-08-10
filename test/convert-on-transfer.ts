@@ -1,7 +1,7 @@
-import { expect, use } from 'chai'
-import { Contract } from 'ethers'
-import { deployContract, MockProvider, solidity } from 'ethereum-waffle'
-import { toBigNumber } from './lib/number'
+import {expect, use} from 'chai'
+import {Contract} from 'ethers'
+import {deployContract, MockProvider, solidity} from 'ethereum-waffle'
+import {toBigNumber} from './lib/number'
 import ConvertOnTransfer from '../build/ConvertOnTransfer.json'
 import MockDev from '../build/MockDev.json'
 
