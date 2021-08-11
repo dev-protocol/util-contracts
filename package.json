@@ -11,7 +11,7 @@
 		"lint": "yarn lint:eslint && yarn lint:solhint && yarn lint:format",
 		"lint:eslint": "eslint . --ext .ts --fix",
 		"lint:solhint": "solhint --fix --max-warnings 0 \"contracts/**/*.sol\"",
-		"lint:format": "prettier --write '**/*.{sol,ts,json,md,yml}'",
+		"lint:format": "prettier --write **/*.{sol,ts,json,md,yml}",
 		"build": "tsc -p tsconfig.build.json",
 		"prebuild": "yarn generate",
 		"clean": "rimraf scripts/**/*.js build",
@@ -49,7 +49,7 @@
 	},
 	"dependencies": {
 		"@devprotocol/protocol": "^3.0.4",
-		"@openzeppelin/contracts": "3.4.1"
+		"@openzeppelin/contracts": "4.2.0"
 	},
 	"directories": {
 		"test": "test"
