@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-pragma solidity >=0.7.6;
+pragma solidity ^0.8.0;
 
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {IAdmin} from "./IAdmin.sol";
