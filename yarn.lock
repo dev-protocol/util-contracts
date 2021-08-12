@@ -42,10 +42,10 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@devprotocol/protocol@3.0.10":
-  version "3.0.10"
-  resolved "https://registry.yarnpkg.com/@devprotocol/protocol/-/protocol-3.0.10.tgz#9611b8001c7c2a184d5db47d99ae124d71cb298e"
-  integrity sha512-Mf0DahpI8dRBdCteeViFWhzCTbKMe6przLyN/ajR4KbhieuLBok+sEjLg/JI4rSitEQKQiHo3D+kWS9+bGUWQQ==
+"@devprotocol/protocol@3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/protocol/-/protocol-3.4.0.tgz#df746e7b82d1aed18d51b146fea62b50e1a6bbc8"
+  integrity sha512-LRQrpT078PavgqxD584QWpALCr9BgX1abttGTOe0gUZsRnT5JSruxp6Bs4k5yfaAD3XRdkf/SR2+YLPwah0QYQ==
   dependencies:
     "@openzeppelin/contracts" "2.5.1"
 
