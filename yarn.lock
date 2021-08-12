@@ -42,7 +42,7 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@devprotocol/protocol@^3.0.4":
+"@devprotocol/protocol@3.0.10":
   version "3.0.10"
   resolved "https://registry.yarnpkg.com/@devprotocol/protocol/-/protocol-3.0.10.tgz#9611b8001c7c2a184d5db47d99ae124d71cb298e"
   integrity sha512-Mf0DahpI8dRBdCteeViFWhzCTbKMe6przLyN/ajR4KbhieuLBok+sEjLg/JI4rSitEQKQiHo3D+kWS9+bGUWQQ==
