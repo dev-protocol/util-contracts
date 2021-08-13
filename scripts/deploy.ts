@@ -16,7 +16,7 @@ const getDeployer = (
 ): ethers.Wallet => {
 	if (!deployMnemonic) {
 		throw new Error(
-			`Error: No DEPLOY_MNEMONIC env var set. Please add it to .<environment>.env file it and try again. See .env.example for more info.\n`
+			'Error: No DEPLOY_MNEMONIC env var set. Please add it to .<environment>.env file it and try again. See .env.example for more info.\n'
 		)
 	}
 
