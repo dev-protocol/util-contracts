@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-pragma solidity 0.7.6;
+pragma solidity ^0.8.0;
 
 import {UsingConfig} from "contracts/config/UsingConfig.sol";
 import {IConfig} from "contracts/config/IConfig.sol";
