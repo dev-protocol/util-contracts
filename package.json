@@ -20,7 +20,8 @@
 	"files": [
 		"contracts/access",
 		"contracts/config",
-		"contracts/storage"
+		"contracts/storage",
+		"contracts/utils"
 	],
 	"author": "",
 	"license": "MPL-2.0",
