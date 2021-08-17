@@ -11,7 +11,10 @@ describe('UsingStorageSimple', () => {
 
 	describe('UsingStorageSimple: eternalStorage', () => {
 		it('returns EternalStorage instance.', async () => {
-			const usingStorageSimple = await deployContract(deployer, UsingStorageSimpleTest)
+			const usingStorageSimple = await deployContract(
+				deployer,
+				UsingStorageSimpleTest
+			)
 			await usingStorageSimple.createStorage({
 				gasLimit: 2000000,
 			})
@@ -23,7 +26,10 @@ describe('UsingStorageSimple', () => {
 	describe('UsingStorageSimple; hasStorage, createStorage', () => {
 		let usingStorageSimple: Contract
 		beforeEach(async () => {
-			usingStorageSimple = await deployContract(deployer, UsingStorageSimpleTest)
+			usingStorageSimple = await deployContract(
+				deployer,
+				UsingStorageSimpleTest
+			)
 		})
 		describe('success', () => {
 			it('if storage has been created, the storage address can be obtained.', async () => {
@@ -67,10 +73,16 @@ describe('UsingStorageSimple', () => {
 		let usingStorageSimple: Contract
 		let usingStorageSimpleNext: Contract
 		beforeEach(async () => {
-			usingStorageSimple = await deployContract(deployer, UsingStorageSimpleTest)
+			usingStorageSimple = await deployContract(
+				deployer,
+				UsingStorageSimpleTest
+			)
 			await usingStorageSimple.createStorage()
 			await usingStorageSimple.setUInt(1)
-			usingStorageSimpleNext = await deployContract(deployer, UsingStorageSimpleTest)
+			usingStorageSimpleNext = await deployContract(
+				deployer,
+				UsingStorageSimpleTest
+			)
 		})
 
 		describe('success', () => {

@@ -59,11 +59,7 @@ contract UsingStorageSimple is Ownable, IUsingStorageSimple {
 	 * Assigns the EternalStorage contract that has already been created.
 	 * Only the storage owner can execute this function.
 	 */
-	function setStorage(address _storageAddress)
-		external
-		override
-		onlyOwner
-	{
+	function setStorage(address _storageAddress) external override onlyOwner {
 		_storage = _storageAddress;
 	}
 

@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 
 interface IUsingStorageSimple {
-
 	function getStorageAddress() external view returns (address);
 
 	function createStorage() external;
