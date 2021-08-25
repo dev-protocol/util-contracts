@@ -1,18 +1,15 @@
 import { expect, use } from 'chai'
-import { Contract } from 'ethers'
-import { deployContract, MockProvider, solidity } from 'ethereum-waffle'
+import { Contract, Signer } from 'ethers'
+import { solidity } from 'ethereum-waffle'
+import { ethers } from 'hardhat'
 import { toBigNumber } from './lib/number'
-import Treasury from '../build/Treasury.json'
-import MockDev from '../build/MockDev.json'
-import MockAddressConfig from '../build/MockAddressConfig.json'
-import MockWithdraw from '../build/MockWithdraw.json'
-import MockProperty from '../build/MockProperty.json'
 
 use(solidity)
 
 describe('Treasury', () => {
-	const provider = new MockProvider()
-	const [deployer, user, property] = provider.getWallets()
+	let deployer: Signer
+	let user: Signer
+	let property: Signer
 	let treasury: Contract
 	let mockDev: Contract
 	let mockAddressConfig: Contract
@@ -20,23 +17,35 @@ describe('Treasury', () => {
 	let mockProperty: Contract
 
 	beforeEach(async () => {
-		mockAddressConfig = await deployContract(deployer, MockAddressConfig, [])
-		treasury = await deployContract(deployer, Treasury, [
-			mockAddressConfig.address,
-		])
-		mockDev = await deployContract(deployer, MockDev)
-		mockWithdraw = await deployContract(deployer, MockWithdraw, [
-			mockAddressConfig.address,
-		])
-		mockProperty = await deployContract(deployer, MockProperty)
+		;[deployer, user, property] = await ethers.getSigners()
+
+		const mockAddressConfigFactory = await ethers.getContractFactory(
+			'MockAddressConfig'
+		)
+		mockAddressConfig = await mockAddressConfigFactory.deploy()
+
+		const treasuryFactory = await ethers.getContractFactory('Treasury')
+		treasury = await treasuryFactory.deploy(mockAddressConfig.address)
+
+		const mockDevFactory = await ethers.getContractFactory('MockDev')
+		mockDev = await mockDevFactory.deploy()
+
+		const mockWithdrawFactory = await ethers.getContractFactory('MockWithdraw')
+		mockWithdraw = await mockWithdrawFactory.deploy(mockAddressConfig.address)
+
+		const mockPropertyFactory = await ethers.getContractFactory('MockProperty')
+		mockProperty = await mockPropertyFactory.deploy()
+
 		await mockDev.transfer(mockWithdraw.address, '1000000000000000000000')
 		await mockAddressConfig.setWithdraw(mockWithdraw.address)
 		await mockAddressConfig.setToken(mockDev.address)
 	})
+
 	describe('withdraw, ', () => {
 		it('Can hold a DEV token.', async () => {
 			const beforeBalance = await mockDev.balanceOf(treasury.address)
-			await treasury.withdraw(property.address, {
+			const propertyAddress = await property.getAddress()
+			await treasury.withdraw(propertyAddress, {
 				gasLimit: 2000000,
 			})
 			const afterBalance = await mockDev.balanceOf(treasury.address)
@@ -44,58 +53,74 @@ describe('Treasury', () => {
 			expect(await diffBalance.toString()).to.be.equal('10000000000000000000')
 		})
 	})
+
 	describe('transferProperty, ', () => {
 		it('DEV token can be transferred to sender.', async () => {
 			const firstBalance = await mockProperty.balanceOf(treasury.address)
 			expect(firstBalance.toString()).to.be.equal('0')
+
 			await mockProperty.mint(treasury.address, '10000000000000000000')
+
 			const secondBalance = await mockProperty.balanceOf(treasury.address)
 			expect(secondBalance.toString()).to.be.equal('10000000000000000000')
-			const nextTreasury = await deployContract(deployer, Treasury, [
-				mockAddressConfig.address,
-			])
-			const beforeBalance = await mockProperty.balanceOf(deployer.address)
+
+			const nextTreasuryFactory = await ethers.getContractFactory('Treasury')
+			const nextTreasury = await nextTreasuryFactory.deploy(
+				mockAddressConfig.address
+			)
+
+			const deployerAddress = await deployer.getAddress()
+
+			const beforeBalance = await mockProperty.balanceOf(deployerAddress)
 			expect(beforeBalance.toString()).to.be.equal('0')
+
 			await treasury.transferProperty(
 				mockProperty.address,
 				nextTreasury.address
 			)
+
 			const thirdBalance = await mockProperty.balanceOf(treasury.address)
 			expect(thirdBalance.toString()).to.be.equal('0')
 			const afterBalance = await mockProperty.balanceOf(nextTreasury.address)
 			expect(afterBalance.toString()).to.be.equal('10000000000000000000')
 		})
+
 		it('Can not be performed except by the owner.', async () => {
-			const treasuryUser = treasury.connect(user)
-			const nextTreasury = await deployContract(deployer, Treasury, [
-				mockAddressConfig.address,
-			])
+			const nextTreasuryFactory = await ethers.getContractFactory('Treasury')
+			const nextTreasury = await nextTreasuryFactory.deploy(
+				mockAddressConfig.address
+			)
+
 			await expect(
-				treasuryUser.transferProperty(
-					mockProperty.address,
-					nextTreasury.address
-				)
+				treasury
+					.connect(user)
+					.transferProperty(mockProperty.address, nextTreasury.address)
 			).to.be.revertedWith('Ownable: caller is not the owner')
 		})
 	})
+
 	describe('transferDev, ', () => {
 		it('DEV token can be transferred to sender.', async () => {
-			await treasury.withdraw(property.address, {
-				gasLimit: 2000000,
-			})
+			const deployerAddress = await deployer.getAddress()
+			const propertyAddress = await property.getAddress()
+
+			await treasury.withdraw(propertyAddress, { gasLimit: 2000000 })
 			const beforeBalance = await mockDev
-				.balanceOf(deployer.address)
+				.balanceOf(deployerAddress)
 				.then(toBigNumber)
+
 			await treasury.transferDev()
+
 			const afterBalance = await mockDev
-				.balanceOf(deployer.address)
+				.balanceOf(deployerAddress)
 				.then(toBigNumber)
+
 			const diffBalance = afterBalance.sub(beforeBalance)
 			expect(await diffBalance.toString()).to.be.equal('10000000000000000000')
 		})
+
 		it('Can not be performed except by the owner.', async () => {
-			const treasuryUser = treasury.connect(user)
-			await expect(treasuryUser.transferDev()).to.be.revertedWith(
+			await expect(treasury.connect(user).transferDev()).to.be.revertedWith(
 				'Ownable: caller is not the owner'
 			)
 		})

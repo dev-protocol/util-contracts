@@ -1,57 +1,70 @@
 import { expect, use } from 'chai'
-import { constants, utils } from 'ethers'
-import { deployContract, MockProvider, solidity } from 'ethereum-waffle'
-import ConfigTest from '../../build/ConfigTest.json'
+import { constants, Contract, Signer, utils } from 'ethers'
+import { solidity } from 'ethereum-waffle'
+import { ethers } from 'hardhat'
 
 use(solidity)
 
 describe('Config', () => {
-	const provider = new MockProvider()
-	const [deployer, test, user] = provider.getWallets()
+	let deployer: Signer
+	let test: Signer
+	let user: Signer
+	let config: Contract
+
+	beforeEach(async () => {
+		;[deployer, test, user] = await ethers.getSigners()
+
+		const configFactory = await ethers.getContractFactory('ConfigTest')
+		config = await configFactory.deploy()
+		await config.createStorage()
+	})
+
 	describe('Config: set, get', () => {
 		it('we can retrieve the address you set.', async () => {
-			const config = await deployContract(deployer, ConfigTest)
-			await config.createStorage()
-			await config.setTest('test', test.address)
+			const testAddress = await test.getAddress()
+			await config.setTest('test', testAddress)
 			const result = await config.getTest('test')
-			expect(result).to.be.equal(test.address)
+
+			expect(result).to.be.equal(testAddress)
 		})
-		it('If someone other than the owner sets it, an error will occur.', async () => {
-			const config = await deployContract(deployer, ConfigTest)
-			await config.createStorage()
-			const userConfig = config.connect(user)
-			await expect(userConfig.setTest('test', test.address)).to.be.revertedWith(
-				'admin only.'
-			)
+
+		it('we can retrieve the address you set.', async () => {
+			const testAddress = await test.getAddress()
+
+			await expect(
+				config.connect(user).setTest('test', testAddress)
+			).to.be.revertedWith('admin only.')
 		})
+
 		it('initial value is 0.', async () => {
-			const config = await deployContract(deployer, ConfigTest)
-			await config.createStorage()
 			const result = await config.getTest('test')
+
 			expect(result).to.be.equal(constants.AddressZero)
 		})
 	})
+
 	describe('Config: setByteKey, getByteKey', () => {
 		const key = utils.keccak256(utils.toUtf8Bytes('test_key'))
+
 		it('we can retrieve the address you set.', async () => {
-			const config = await deployContract(deployer, ConfigTest)
-			await config.createStorage()
-			await config.setByteKeyTest(key, test.address)
+			const testAddress = await test.getAddress()
+			await config.setByteKeyTest(key, testAddress)
 			const result = await config.getByteKeyTest(key)
-			expect(result).to.be.equal(test.address)
+
+			expect(result).to.be.equal(testAddress)
 		})
+
 		it('If someone other than the owner sets it, an error will occur.', async () => {
-			const config = await deployContract(deployer, ConfigTest)
-			await config.createStorage()
-			const userConfig = config.connect(user)
+			const testAddress = await test.getAddress()
+
 			await expect(
-				userConfig.setByteKeyTest(key, test.address)
+				config.connect(user).setByteKeyTest(key, testAddress)
 			).to.be.revertedWith('admin only.')
 		})
+
 		it('initial value is 0.', async () => {
-			const config = await deployContract(deployer, ConfigTest)
-			await config.createStorage()
 			const result = await config.getTest(key)
+
 			expect(result).to.be.equal(constants.AddressZero)
 		})
 	})
