@@ -1,9 +1,17 @@
-/* eslint-disable @typescript-eslint/prefer-readonly-parameter-types */
-import { deploy } from './deploy'
-import { abi, bytecode } from '../build/Treasury.json'
+import { ethers } from 'hardhat'
+import { config } from 'dotenv'
 
-void deploy(async (wallet, ContractFactory, envs) => {
-	const { CONFIG } = envs
-	const factory = new ContractFactory(abi, bytecode, wallet)
-	void factory.deploy(CONFIG)
-})
+async function deployTreasury() {
+	const Config = config().parsed
+	const Treasury = await ethers.getContractFactory('Treasury')
+	const treasury = await Treasury.deploy(Config)
+
+	console.log('Treasury deployed to:', treasury.address)
+}
+
+deployTreasury()
+	.then(() => process.exit(0))
+	.catch((error) => {
+		console.error(error)
+		process.exit(1)
+	})

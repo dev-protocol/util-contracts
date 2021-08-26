@@ -1,27 +1,33 @@
 import { expect, use } from 'chai'
-import { Contract } from 'ethers'
-import { deployContract, MockProvider, solidity } from 'ethereum-waffle'
-import LibraryTest from '../../build/LibraryTest.json'
+import { Contract, Signer } from 'ethers'
+import { solidity } from 'ethereum-waffle'
+import { ethers } from 'hardhat'
 
 use(solidity)
 
 describe('LibraryTest', () => {
-	const provider = new MockProvider()
-	const [deployer] = provider.getWallets()
-	let lubraryTest: Contract
+	let deployer: Signer
+	let libraryTest: Contract
+
 	before(async () => {
-		lubraryTest = await deployContract(deployer, LibraryTest)
+		;[deployer] = await ethers.getSigners()
+
+		const libraryTestFactory = await ethers.getContractFactory('LibraryTest')
+		libraryTest = await libraryTestFactory.deploy()
 	})
+
 	describe('LibraryTest: base64Encode', () => {
 		it('convert to base64 encode.', async () => {
-			const encoded = await lubraryTest.base64Encode('halo world')
+			const encoded = await libraryTest.base64Encode('halo world')
 			expect(encoded).to.be.equal('aGFsbyB3b3JsZA==')
 		})
 	})
+
 	describe('LibraryTest: addressToChecksumString', () => {
 		it('convert address to string.', async () => {
-			const wallet = provider.createEmptyWallet()
-			const addressString = await lubraryTest.addressToChecksumString(
+			const wallet = ethers.Wallet.createRandom()
+
+			const addressString = await libraryTest.addressToChecksumString(
 				wallet.address
 			)
 			expect(addressString).to.be.equal(wallet.address)
