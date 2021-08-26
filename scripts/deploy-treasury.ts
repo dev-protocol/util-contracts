@@ -1,10 +1,11 @@
-import env, { ethers } from 'hardhat'
+import { ethers } from 'hardhat'
+import { config } from 'dotenv'
 
 async function deployTreasury() {
-	const config = env
-	console.log(config)
+	const testAddress = '0x1000000000000000000000000000000000000000'
+	const Config = config().parsed ? config().parsed : testAddress
 	const Treasury = await ethers.getContractFactory('Treasury')
-	const treasury = await Treasury.deploy()
+	const treasury = await Treasury.deploy(Config)
 
 	console.log('Treasury deployed to:', treasury.address)
 }
