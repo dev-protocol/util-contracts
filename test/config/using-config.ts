@@ -1,30 +1,33 @@
 import { expect, use } from 'chai'
-import { deployContract, MockProvider, solidity } from 'ethereum-waffle'
-import Config from '../../build/Config.json'
-import UsingConfigTest from '../../build/UsingConfigTest.json'
+import { Contract, Signer } from 'ethers'
+import { solidity } from 'ethereum-waffle'
+import { ethers } from 'hardhat'
 
 use(solidity)
 
 describe('UsingConfig', () => {
-	const provider = new MockProvider()
-	const [deployer] = provider.getWallets()
+	let config: Contract
+	let usingConfig: Contract
+
+	beforeEach(async () => {
+		const configFactory = await ethers.getContractFactory('Config')
+		config = await configFactory.deploy()
+
+		const usingConfigFactory = await ethers.getContractFactory(
+			'UsingConfigTest'
+		)
+		usingConfig = await usingConfigFactory.deploy(config.address)
+	})
 
 	describe('UsingConfig: configAddress', () => {
 		it('we can get the address of the config.', async () => {
-			const config = await deployContract(deployer, Config)
-			const usingConfig = await deployContract(deployer, UsingConfigTest, [
-				config.address,
-			])
 			const configAddress = await usingConfig.configAddress()
 			expect(configAddress).to.be.equal(config.address)
 		})
 	})
+
 	describe('UsingConfig: config', () => {
 		it('we can get the address of the config.', async () => {
-			const config = await deployContract(deployer, Config)
-			const usingConfig = await deployContract(deployer, UsingConfigTest, [
-				config.address,
-			])
 			const configAddress = await usingConfig.configTest()
 			expect(configAddress).to.be.equal(config.address)
 		})
