@@ -2,8 +2,7 @@ import { ethers } from 'hardhat'
 import { config } from 'dotenv'
 
 async function deployTreasury() {
-	const testAddress = '0x1000000000000000000000000000000000000000'
-	const Config = config().parsed ? config().parsed : testAddress
+	const Config = config().parsed
 	const Treasury = await ethers.getContractFactory('Treasury')
 	const treasury = await Treasury.deploy(Config)
 
