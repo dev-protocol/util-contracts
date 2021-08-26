@@ -4,9 +4,9 @@
 	"description": "Template repository for using TypeScript and Solidity",
 	"main": "index.js",
 	"scripts": {
-		"test": "npx hardhat test",
+		"test": "hardhat test",
 		"pretest": "yarn generate",
-		"generate": "npx hardhat compile",
+		"generate": "hardhat compile",
 		"pregenerate": "yarn clean",
 		"lint": "yarn lint:eslint && yarn lint:solhint && yarn lint:format",
 		"lint:eslint": "eslint . --ext .ts --fix",
