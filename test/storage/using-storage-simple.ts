@@ -1,21 +1,24 @@
 import { expect, use } from 'chai'
-import { Contract, Signer, utils } from 'ethers'
+import { Signer, utils } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
+import {
+	UsingStorageSimpleTest,
+	UsingStorageSimpleTest__factory,
+} from '../../typechain'
 
 use(solidity)
 
 describe('UsingStorageSimple', () => {
-	let deployer: Signer
 	let user: Signer
-	let usingStorageSimple: Contract
+	let usingStorageSimple: UsingStorageSimpleTest
 
 	beforeEach(async () => {
-		;[deployer, user] = await ethers.getSigners()
+		;[, user] = await ethers.getSigners()
 
-		const usingStorageSimpleFact = await ethers.getContractFactory(
+		const usingStorageSimpleFact = (await ethers.getContractFactory(
 			'UsingStorageSimpleTest'
-		)
+		)) as UsingStorageSimpleTest__factory
 		usingStorageSimple = await usingStorageSimpleFact.deploy()
 	})
 
@@ -78,12 +81,12 @@ describe('UsingStorageSimple', () => {
 	})
 
 	describe('UsingStorageSimple; getStorageAddress, setStorage, changeOwner', () => {
-		let usingStorageSimpleNext: Contract
+		let usingStorageSimpleNext: UsingStorageSimpleTest
 
 		beforeEach(async () => {
-			const usingStorageSimpleNextFact = await ethers.getContractFactory(
+			const usingStorageSimpleNextFact = (await ethers.getContractFactory(
 				'UsingStorageSimpleTest'
-			)
+			)) as UsingStorageSimpleTest__factory
 			usingStorageSimpleNext = await usingStorageSimpleNextFact.deploy()
 
 			await usingStorageSimple.createStorage()

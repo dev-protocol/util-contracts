@@ -1,19 +1,22 @@
 import { expect, use } from 'chai'
-import { Contract, Signer } from 'ethers'
+import { Signer } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
+import { AdminTest, AdminTest__factory } from '../../typechain'
 
 use(solidity)
 
 describe('Admin', () => {
 	let deployer: Signer
 	let newAdmin: Signer
-	let admin: Contract
+	let admin: AdminTest
 
 	beforeEach(async () => {
 		;[deployer, newAdmin] = await ethers.getSigners()
 
-		const adminFactory = await ethers.getContractFactory('AdminTest')
+		const adminFactory = (await ethers.getContractFactory(
+			'AdminTest'
+		)) as AdminTest__factory
 		admin = await adminFactory.deploy()
 	})
 
@@ -60,7 +63,7 @@ describe('Admin', () => {
 	describe('Admin: deleteAdmin, isAdmin', () => {
 		describe('success', () => {
 			it('administrative privileges can be removed.', async () => {
-				const deployerAddress = deployer.getAddress()
+				const deployerAddress = await deployer.getAddress()
 
 				let result = await admin.isAdmin(deployerAddress)
 				expect(result).to.be.equal(true)
