@@ -1,5 +1,7 @@
 import '@nomiclabs/hardhat-waffle'
 import '@nomiclabs/hardhat-ethers'
+import '@typechain/hardhat'
+// Import { HardhatUserConfig } from 'hardhat/types'
 
 export default {
 	networks: {

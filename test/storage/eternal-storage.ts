@@ -1,16 +1,16 @@
 import { expect, use } from 'chai'
-import { constants, Contract, Signer, utils } from 'ethers'
+import { constants, Signer, utils } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
+import { EternalStorage, EternalStorage__factory } from '../../typechain'
 
 use(solidity)
 
 describe('EternalStorage', () => {
-	let deployer: Signer
 	let user: Signer
 	let test: Signer
-	let eternalStorage: Contract
-	let eternalStorageOther: Contract
+	let eternalStorage: EternalStorage
+	let eternalStorageOther: EternalStorage
 
 	const getKey = (): string => {
 		const tmp = Math.floor(Math.random() * 10000000)
@@ -18,18 +18,18 @@ describe('EternalStorage', () => {
 	}
 
 	beforeEach(async () => {
-		;[deployer, user, test] = await ethers.getSigners()
+		;[, user, test] = await ethers.getSigners()
 
-		const eternalStorageFactory = await ethers.getContractFactory(
+		const eternalStorageFactory = (await ethers.getContractFactory(
 			'EternalStorage'
-		)
+		)) as EternalStorage__factory
 		eternalStorage = await eternalStorageFactory.deploy()
 		eternalStorageOther = eternalStorage.connect(user)
 	})
 
 	describe('changeOwner, ', () => {
 		it('if anyone other than the owner executes it, an error occurs.', async () => {
-			const userAddress = user.getAddress()
+			const userAddress = await user.getAddress()
 			await expect(
 				eternalStorageOther.changeOwner(userAddress)
 			).to.be.revertedWith('not current owner')
@@ -38,7 +38,7 @@ describe('EternalStorage', () => {
 		it('if the owner changes, the write permissions will also change.', async () => {
 			const key = getKey()
 			let value = await eternalStorageOther.getUint(key)
-			const userAddress = user.getAddress()
+			const userAddress = await user.getAddress()
 
 			expect(value.toNumber()).to.be.equal(0)
 			await expect(eternalStorageOther.setUint(key, 1)).to.be.revertedWith(

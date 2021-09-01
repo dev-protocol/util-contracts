@@ -1,20 +1,22 @@
 import { expect, use } from 'chai'
-import { constants, Contract, Signer, utils } from 'ethers'
+import { constants, Signer, utils } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
+import { ConfigTest, ConfigTest__factory } from '../../typechain'
 
 use(solidity)
 
 describe('Config', () => {
-	let deployer: Signer
 	let test: Signer
 	let user: Signer
-	let config: Contract
+	let config: ConfigTest
 
 	beforeEach(async () => {
-		;[deployer, test, user] = await ethers.getSigners()
+		;[, test, user] = await ethers.getSigners()
 
-		const configFactory = await ethers.getContractFactory('ConfigTest')
+		const configFactory = (await ethers.getContractFactory(
+			'ConfigTest'
+		)) as ConfigTest__factory
 		config = await configFactory.deploy()
 		await config.createStorage()
 	})

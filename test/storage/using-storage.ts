@@ -1,7 +1,8 @@
 import { expect, use } from 'chai'
-import { constants, Contract, Signer, utils, Wallet } from 'ethers'
+import { Signer, utils } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
+import { UsingStorageTest, UsingStorageTest__factory } from '../../typechain'
 
 use(solidity)
 
@@ -9,14 +10,14 @@ describe('UsingStorage', () => {
 	let deployer: Signer
 	let newAdmin: Signer
 	let user: Signer
-	let usingStorage: Contract
+	let usingStorage: UsingStorageTest
 
 	beforeEach(async () => {
 		;[deployer, newAdmin, user] = await ethers.getSigners()
 
-		const usingStorageFactory = await ethers.getContractFactory(
+		const usingStorageFactory = (await ethers.getContractFactory(
 			'UsingStorageTest'
-		)
+		)) as UsingStorageTest__factory
 		usingStorage = await usingStorageFactory.deploy()
 	})
 
@@ -24,7 +25,7 @@ describe('UsingStorage', () => {
 		describe('success', async () => {
 			const checkAdminAndStorageOwnerAuthority = async (
 				// eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-				us: Contract,
+				us: UsingStorageTest,
 				target: string,
 				checkAdminValue: boolean,
 				checkStorageOwnerValue: boolean
@@ -158,15 +159,15 @@ describe('UsingStorage', () => {
 	})
 
 	describe('UsingStorage; getStorageAddress, setStorage, changeOwner', () => {
-		let usingStorageNext: Contract
+		let usingStorageNext: UsingStorageTest
 
 		beforeEach(async () => {
 			await usingStorage.createStorage()
 			await usingStorage.setUInt(1)
 
-			const usingStorageNextFact = await ethers.getContractFactory(
+			const usingStorageNextFact = (await ethers.getContractFactory(
 				'UsingStorageTest'
-			)
+			)) as UsingStorageTest__factory
 			usingStorageNext = await usingStorageNextFact.deploy()
 		})
 

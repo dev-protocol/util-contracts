@@ -1,8 +1,14 @@
 import { expect, use } from 'chai'
-import { Contract, Signer } from 'ethers'
+import { Signer } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
 import { toBigNumber } from './lib/number'
+import {
+	MockDev,
+	MockDev__factory,
+	ConvertOnTransfer,
+	ConvertOnTransfer__factory,
+} from '../typechain'
 
 use(solidity)
 
@@ -10,19 +16,21 @@ describe('ConvertOnTransfer', () => {
 	let deployer: Signer
 	let user: Signer
 	let user2: Signer
-	let mockDev: Contract
-	let convertOnTransfer: Contract
-	let convertOnTransferUser: Contract
+	let mockDev: MockDev
+	let convertOnTransfer: ConvertOnTransfer
+	let convertOnTransferUser: ConvertOnTransfer
 
 	beforeEach(async () => {
 		;[deployer, user, user2] = await ethers.getSigners()
 
-		const mockDevFactory = await ethers.getContractFactory('MockDev')
+		const mockDevFactory = (await ethers.getContractFactory(
+			'MockDev'
+		)) as MockDev__factory
 		mockDev = await mockDevFactory.deploy()
 
-		const convertOnTransferFactory = await ethers.getContractFactory(
+		const convertOnTransferFactory = (await ethers.getContractFactory(
 			'ConvertOnTransfer'
-		)
+		)) as ConvertOnTransfer__factory
 		convertOnTransfer = await convertOnTransferFactory.deploy(
 			mockDev.address,
 			true
