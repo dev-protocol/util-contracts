@@ -10,8 +10,8 @@ import {
 	MockAddressRegistry__factory,
 	MockDev,
 	MockDev__factory,
-	MockWithdraw,
-	MockWithdraw__factory,
+	MockWithdrawL2,
+	MockWithdrawL2__factory,
 	MockProperty,
 	MockProperty__factory,
 } from '../typechain'
@@ -25,7 +25,7 @@ describe('TreasuryL2', () => {
 	let treasury: TreasuryL2
 	let mockDev: MockDev
 	let mockAddressRegistry: MockAddressRegistry
-	let mockWithdraw: MockWithdraw
+	let mockWithdraw: MockWithdrawL2
 	let mockProperty: MockProperty
 
 	beforeEach(async () => {
@@ -48,8 +48,8 @@ describe('TreasuryL2', () => {
 		mockDev = await mockDevFactory.deploy()
 
 		const mockWithdrawFactory = (await ethers.getContractFactory(
-			'MockWithdraw'
-		)) as MockWithdraw__factory
+			'MockWithdrawL2'
+		)) as MockWithdrawL2__factory
 		mockWithdraw = await mockWithdrawFactory.deploy(mockAddressRegistry.address)
 
 		const mockPropertyFactory = (await ethers.getContractFactory(
