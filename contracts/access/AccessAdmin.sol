@@ -4,7 +4,7 @@ pragma solidity ^0.8.4;
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {IAdmin} from "./IAdmin.sol";
 
-abstract contract Admin is AccessControl, IAdmin {
+abstract contract AccessAdmin is AccessControl, IAdmin {
 	constructor() {
 		_setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
 	}
