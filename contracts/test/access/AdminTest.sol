@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MPL-2.0
 pragma solidity ^0.8.4;
 
-import {AccessAdmin} from "contracts/access/Admin.sol";
+import {AccessAdmin} from "contracts/access/AccessAdmin.sol";
 
 /**
  * Module for contrast handling EternalStorage.

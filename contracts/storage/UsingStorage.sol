@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MPL-2.0
 pragma solidity ^0.8.4;
 
-import {Admin} from "../access/Admin.sol";
+import {AccessAdmin} from "../access/AccessAdmin.sol";
 import {EternalStorage} from "./EternalStorage.sol";
 import {IUsingStorage} from "./IUsingStorage.sol";
 
 /**
  * Module for contrast handling EternalStorage.
  */
-contract UsingStorage is Admin, IUsingStorage {
+contract UsingStorage is AccessAdmin, IUsingStorage {
 	address private _storage;
 	bytes32 public constant STORAGE_OWNER_ROLE =
 		keccak256("STORAGE_OWNER_ROLE");
