@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 // see https://ethereum.stackexchange.com/questions/63908/address-checksum-solidity-implementation
 library AddressLib {

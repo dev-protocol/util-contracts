@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 // see https://github.com/Brechtpd/base64/blob/main/base64.sol
 library Base64 {

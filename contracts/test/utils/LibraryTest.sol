@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 import {AddressLib} from "../../utils/AddressLib.sol";
 import {Base64} from "../../utils/Base64.sol";
