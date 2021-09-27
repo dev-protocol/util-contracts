@@ -7,8 +7,8 @@ import {
 	AdminL2__factory,
 	TreasuryL2,
 	TreasuryL2__factory,
-	UpgradeableProxy,
-	UpgradeableProxy__factory,
+	TreasuryProxy,
+	TreasuryProxy__factory,
 } from '../typechain'
 
 use(solidity)
@@ -18,7 +18,7 @@ describe('Treasury Upgradeability', () => {
 
 	let treasuryV1: TreasuryL2
 	let admin: AdminL2
-	let upgradeableProxy: UpgradeableProxy
+	let proxy: TreasuryProxy
 	let proxified: Contract
 
 	beforeEach(async () => {
@@ -34,16 +34,16 @@ describe('Treasury Upgradeability', () => {
 		)) as AdminL2__factory
 		admin = await adminFactory.deploy()
 
-		const upgradeableProxyFactory = (await ethers.getContractFactory(
-			'UpgradeableProxy'
-		)) as UpgradeableProxy__factory
-		upgradeableProxy = await upgradeableProxyFactory.deploy(
+		const proxyFactory = (await ethers.getContractFactory(
+			'TreasuryProxy'
+		)) as TreasuryProxy__factory
+		proxy = await proxyFactory.deploy(
 			treasuryV1.address,
 			admin.address,
 			utils.toUtf8Bytes('')
 		)
 
-		proxified = treasuryV1.attach(upgradeableProxy.address)
+		proxified = treasuryV1.attach(proxy.address)
 	})
 
 	describe('Initialize', () => {
