@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MPL-2.0
 pragma solidity ^0.8.4;
 
-import {Admin} from "contracts/access/Admin.sol";
+import {AccessAdmin} from "contracts/access/Admin.sol";
 
 /**
  * Module for contrast handling EternalStorage.
  */
-contract AdminTest is Admin {
+contract AdminTest is AccessAdmin {
 	uint256 private constant _VALUE = 1;
 
 	function getValueOnlyAdmin() external view onlyAdmin returns (uint256) {
