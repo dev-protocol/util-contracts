@@ -42,7 +42,7 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
-"@devprotocol/protocol-l2@^0.1.0":
+"@devprotocol/protocol-l2@0.1.0":
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@devprotocol/protocol-l2/-/protocol-l2-0.1.0.tgz#12a695705f6268127f8a92100924f17046f3170b"
   integrity sha512-R/gDYF6x7EojJFYj5nRoQnkcWBYOqkY0/epPAmculdPWNum9iiZcf8sdTPCdOQZcY4Pe4cxNklLak4Nyne2BZg==
