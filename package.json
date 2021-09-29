@@ -56,7 +56,7 @@
 		"type-fest": "2.3.4",
 		"typechain": "5.1.2",
 		"typescript": "4.4.3",
-		"@devprotocol/protocol-l2": "^0.1.0"
+		"@devprotocol/protocol-l2": "0.1.0"
 	},
 	"dependencies": {
 		"@openzeppelin/contracts": "4.3.2"
