@@ -20,9 +20,6 @@ const config: HardhatUserConfig = {
 	networks: {
 		arbitrumRinkeby: {
 			url: `https://arbitrum-rinkeby.infura.io/v3/${process.env.INFURA_KEY!}`,
-			accounts: {
-				mnemonic: process.env.MNEMONIC!,
-			},
 		},
 	},
 }
