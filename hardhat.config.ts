@@ -2,12 +2,11 @@
 import '@nomiclabs/hardhat-waffle'
 import '@nomiclabs/hardhat-ethers'
 import '@typechain/hardhat'
-import { HardhatUserConfig } from 'hardhat/config'
 import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-const config: HardhatUserConfig = {
+const config = {
 	solidity: {
 		version: '0.8.4',
 		settings: {
