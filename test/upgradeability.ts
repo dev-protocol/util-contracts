@@ -3,8 +3,8 @@ import { Contract, Signer, utils } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
 import {
-	TreasuryAdmin,
-	TreasuryAdmin__factory,
+	TreasuryAdminTest,
+	TreasuryAdminTest__factory,
 	TreasuryL2,
 	TreasuryL2__factory,
 	TreasuryProxy,
@@ -17,7 +17,7 @@ describe('Treasury Upgradeability', () => {
 	let other: Signer
 
 	let treasuryV1: TreasuryL2
-	let admin: TreasuryAdmin
+	let admin: TreasuryAdminTest
 	let proxy: TreasuryProxy
 	let proxified: Contract
 
@@ -30,8 +30,8 @@ describe('Treasury Upgradeability', () => {
 		treasuryV1 = await treasuryFactory.deploy()
 
 		const adminFactory = (await ethers.getContractFactory(
-			'TreasuryAdmin'
-		)) as TreasuryAdmin__factory
+			'TreasuryAdminTest'
+		)) as TreasuryAdminTest__factory
 		admin = await adminFactory.deploy()
 
 		const proxyFactory = (await ethers.getContractFactory(

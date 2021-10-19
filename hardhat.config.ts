@@ -1,13 +1,30 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import '@nomiclabs/hardhat-waffle'
 import '@nomiclabs/hardhat-ethers'
 import '@typechain/hardhat'
-// Import { HardhatUserConfig } from 'hardhat/types'
+import { HardhatUserConfig } from 'hardhat/config'
+import * as dotenv from 'dotenv'
 
-export default {
-	networks: {
-		localhost: {
-			url: 'http://127.0.0.1:8545',
+dotenv.config()
+
+const config: HardhatUserConfig = {
+	solidity: {
+		version: '0.8.4',
+		settings: {
+			optimizer: {
+				enabled: true,
+				runs: 200,
+			},
 		},
 	},
-	solidity: '0.8.4',
+	networks: {
+		arbitrumRinkeby: {
+			url: `https://arbitrum-rinkeby.infura.io/v3/${process.env.INFURA_KEY!}`,
+			// Accounts: {
+			// 	mnemonic: process.env.MNEMONIC,
+			// },
+		},
+	},
 }
+
+export default config
