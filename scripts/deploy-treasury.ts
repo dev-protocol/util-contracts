@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
 import { ethers } from 'hardhat'
 
 async function main() {

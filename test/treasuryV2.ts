@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import { expect, use } from 'chai'
 import { Signer } from 'ethers'
 import { solidity } from 'ethereum-waffle'

@@ -17,6 +17,8 @@
 		"prettier"
 	],
 	"rules": {
-		"@typescript-eslint/prefer-readonly-parameter-types": "warn"
+		"@typescript-eslint/prefer-readonly-parameter-types": "warn",
+		"@typescript-eslint/no-unsafe-call": "off",
+		"@typescript-eslint/no-unsafe-assignment": "off"
 	}
 }
