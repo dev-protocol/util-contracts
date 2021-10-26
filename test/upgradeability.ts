@@ -5,8 +5,8 @@ import { ethers } from 'hardhat'
 import {
 	TreasuryAdminTest,
 	TreasuryAdminTest__factory,
-	TreasuryL2,
-	TreasuryL2__factory,
+	TreasuryV2,
+	TreasuryV2__factory,
 	TreasuryProxy,
 	TreasuryProxy__factory,
 } from '../typechain'
@@ -16,7 +16,7 @@ use(solidity)
 describe('Treasury Upgradeability', () => {
 	let other: Signer
 
-	let treasuryV1: TreasuryL2
+	let treasuryV1: TreasuryV2
 	let admin: TreasuryAdminTest
 	let proxy: TreasuryProxy
 	let proxified: Contract
@@ -25,8 +25,8 @@ describe('Treasury Upgradeability', () => {
 		;[, other] = await ethers.getSigners()
 
 		const treasuryFactory = (await ethers.getContractFactory(
-			'TreasuryL2'
-		)) as TreasuryL2__factory
+			'TreasuryV2'
+		)) as TreasuryV2__factory
 		treasuryV1 = await treasuryFactory.deploy()
 
 		const adminFactory = (await ethers.getContractFactory(
@@ -56,12 +56,12 @@ describe('Treasury Upgradeability', () => {
 	})
 
 	describe('Upgrade', async () => {
-		let treasuryV2: TreasuryL2
+		let treasuryV2: TreasuryV2
 
 		beforeEach(async () => {
 			const treasuryV2Factory = (await ethers.getContractFactory(
-				'TreasuryL2'
-			)) as TreasuryL2__factory
+				'TreasuryV2'
+			)) as TreasuryV2__factory
 			treasuryV2 = await treasuryV2Factory.deploy()
 		})
 

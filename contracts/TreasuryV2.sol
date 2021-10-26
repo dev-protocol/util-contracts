@@ -4,13 +4,13 @@ pragma solidity =0.8.4;
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 // prettier-ignore
-import {IWithdraw} from "@devprotocol/protocol-l2/contracts/interface/IWithdraw.sol";
+import {IWithdraw} from "@devprotocol/protocol-v2/contracts/interface/IWithdraw.sol";
 // prettier-ignore
-import {IProperty} from "@devprotocol/protocol-l2/contracts/interface/IProperty.sol";
+import {IProperty} from "@devprotocol/protocol-v2/contracts/interface/IProperty.sol";
 // prettier-ignore
-import {IAddressRegistry} from "@devprotocol/protocol-l2/contracts/interface/IAddressRegistry.sol";
+import {IAddressRegistry} from "@devprotocol/protocol-v2/contracts/interface/IAddressRegistry.sol";
 
-contract TreasuryL2 is OwnableUpgradeable {
+contract TreasuryV2 is OwnableUpgradeable {
 	IAddressRegistry private registry;
 
 	function initialize(address _registry) external initializer {
