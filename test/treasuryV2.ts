@@ -4,28 +4,28 @@ import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
 import { toBigNumber } from './lib/number'
 import {
-	TreasuryL2,
-	TreasuryL2__factory,
+	TreasuryV2,
+	TreasuryV2__factory,
 	MockAddressRegistry,
 	MockAddressRegistry__factory,
 	MockDev,
 	MockDev__factory,
-	MockWithdrawL2,
-	MockWithdrawL2__factory,
+	MockWithdrawV2,
+	MockWithdrawV2__factory,
 	MockProperty,
 	MockProperty__factory,
 } from '../typechain'
 
 use(solidity)
 
-describe('TreasuryL2', () => {
+describe('TreasuryV2', () => {
 	let deployer: Signer
 	let user: Signer
 	let property: Signer
-	let treasury: TreasuryL2
+	let treasury: TreasuryV2
 	let mockDev: MockDev
 	let mockAddressRegistry: MockAddressRegistry
-	let mockWithdraw: MockWithdrawL2
+	let mockWithdraw: MockWithdrawV2
 	let mockProperty: MockProperty
 
 	beforeEach(async () => {
@@ -37,8 +37,8 @@ describe('TreasuryL2', () => {
 		mockAddressRegistry = await mockAddressRegistryFactory.deploy()
 
 		const treasuryFactory = (await ethers.getContractFactory(
-			'TreasuryL2'
-		)) as TreasuryL2__factory
+			'TreasuryV2'
+		)) as TreasuryV2__factory
 		treasury = await treasuryFactory.deploy()
 		await treasury.initialize(mockAddressRegistry.address)
 
@@ -48,8 +48,8 @@ describe('TreasuryL2', () => {
 		mockDev = await mockDevFactory.deploy()
 
 		const mockWithdrawFactory = (await ethers.getContractFactory(
-			'MockWithdrawL2'
-		)) as MockWithdrawL2__factory
+			'MockWithdrawV2'
+		)) as MockWithdrawV2__factory
 		mockWithdraw = await mockWithdrawFactory.deploy(mockAddressRegistry.address)
 
 		const mockPropertyFactory = (await ethers.getContractFactory(
@@ -86,9 +86,9 @@ describe('TreasuryL2', () => {
 			expect(secondBalance.toString()).to.be.equal('10000000000000000000')
 
 			const nextTreasuryFactory = (await ethers.getContractFactory(
-				'TreasuryL2'
-			)) as TreasuryL2__factory
-			const nextTreasury: TreasuryL2 = await nextTreasuryFactory.deploy()
+				'TreasuryV2'
+			)) as TreasuryV2__factory
+			const nextTreasury: TreasuryV2 = await nextTreasuryFactory.deploy()
 			await nextTreasury.initialize(mockAddressRegistry.address)
 
 			const deployerAddress = await deployer.getAddress()
@@ -109,9 +109,9 @@ describe('TreasuryL2', () => {
 
 		it('Can not be performed except by the owner.', async () => {
 			const nextTreasuryFactory = (await ethers.getContractFactory(
-				'TreasuryL2'
-			)) as TreasuryL2__factory
-			const nextTreasury: TreasuryL2 = await nextTreasuryFactory.deploy()
+				'TreasuryV2'
+			)) as TreasuryV2__factory
+			const nextTreasury: TreasuryV2 = await nextTreasuryFactory.deploy()
 			await nextTreasury.initialize(mockAddressRegistry.address)
 
 			await expect(

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 
 import {OwnableUpgradeable} from "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import {IAddressRegistry} from "@devprotocol/protocol-l2/contracts/interface/IAddressRegistry.sol";
+import {IAddressRegistry} from "@devprotocol/protocol-v2/contracts/interface/IAddressRegistry.sol";
 
 import "hardhat/console.sol";
 

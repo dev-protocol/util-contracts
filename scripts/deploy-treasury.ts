@@ -1,6 +1,3 @@
-/* eslint-disable no-implicit-globals */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
 import { ethers } from 'hardhat'
 
 async function main() {
@@ -10,24 +7,24 @@ async function main() {
 	//! !!!!!!!!!!!!!!!!!!!!!
 
 	// GitHubMarket
-	const treasuryL2Factory = await ethers.getContractFactory('TreasuryL2')
-	const treasuryL2 = await treasuryL2Factory.deploy()
-	await treasuryL2.deployed()
+	const treasuryV2Factory = await ethers.getContractFactory('TreasuryV2')
+	const treasuryV2 = await treasuryV2Factory.deploy()
+	await treasuryV2.deployed()
 
-	console.log(`logic address:${treasuryL2.address}`)
+	console.log(`logic address:${treasuryV2.address}`)
 
 	const data = ethers.utils.arrayify('0x')
 
 	const treasuryProxyFactory = await ethers.getContractFactory('TreasuryProxy')
 	const treasuryProxy = await treasuryProxyFactory.deploy(
-		treasuryL2.address,
+		treasuryV2.address,
 		adminAddress,
 		data
 	)
 	await treasuryProxy.deployed()
 	console.log(`proxy address:${treasuryProxy.address}`)
 
-	const proxy = treasuryL2Factory.attach(treasuryProxy.address)
+	const proxy = treasuryV2Factory.attach(treasuryProxy.address)
 	await proxy.initialize(registryAddress)
 }
 

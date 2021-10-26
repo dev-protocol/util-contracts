@@ -3,9 +3,9 @@ pragma solidity ^0.8.4;
 
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-import {IAddressRegistry} from "@devprotocol/protocol-l2/contracts/interface/IAddressRegistry.sol";
+import {IAddressRegistry} from "@devprotocol/protocol-v2/contracts/interface/IAddressRegistry.sol";
 
-contract MockWithdrawL2 {
+contract MockWithdrawV2 {
 	IAddressRegistry private registry;
 
 	constructor(address _registry) {
