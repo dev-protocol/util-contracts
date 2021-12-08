@@ -1,12 +1,7 @@
 import { expect, use } from 'chai'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
-import {
-	Config,
-	Config__factory,
-	UsingConfigTest,
-	UsingConfigTest__factory,
-} from '../../typechain'
+import { Config, UsingConfigTest } from '../../typechain-types'
 
 use(solidity)
 
@@ -15,14 +10,12 @@ describe('UsingConfig', () => {
 	let usingConfig: UsingConfigTest
 
 	beforeEach(async () => {
-		const configFactory = (await ethers.getContractFactory(
-			'Config'
-		)) as Config__factory
+		const configFactory = await ethers.getContractFactory('Config')
 		config = await configFactory.deploy()
 
-		const usingConfigFactory = (await ethers.getContractFactory(
+		const usingConfigFactory = await ethers.getContractFactory(
 			'UsingConfigTest'
-		)) as UsingConfigTest__factory
+		)
 		usingConfig = await usingConfigFactory.deploy(config.address)
 	})
 

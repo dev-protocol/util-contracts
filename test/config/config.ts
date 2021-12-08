@@ -2,7 +2,7 @@ import { expect, use } from 'chai'
 import { constants, Signer, utils } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
-import { ConfigTest, ConfigTest__factory } from '../../typechain'
+import { ConfigTest } from '../../typechain-types'
 
 use(solidity)
 
@@ -14,9 +14,7 @@ describe('Config', () => {
 	beforeEach(async () => {
 		;[, test, user] = await ethers.getSigners()
 
-		const configFactory = (await ethers.getContractFactory(
-			'ConfigTest'
-		)) as ConfigTest__factory
+		const configFactory = await ethers.getContractFactory('ConfigTest')
 		config = await configFactory.deploy()
 		await config.createStorage()
 	})

@@ -2,7 +2,7 @@ import { expect, use } from 'chai'
 import { Signer } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
-import { AdminTest, AdminTest__factory } from '../../typechain'
+import { AdminTest } from '../../typechain-types'
 
 use(solidity)
 
@@ -14,9 +14,7 @@ describe('Admin', () => {
 	beforeEach(async () => {
 		;[deployer, newAdmin] = await ethers.getSigners()
 
-		const adminFactory = (await ethers.getContractFactory(
-			'AdminTest'
-		)) as AdminTest__factory
+		const adminFactory = await ethers.getContractFactory('AdminTest')
 		admin = await adminFactory.deploy()
 	})
 

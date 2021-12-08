@@ -1,7 +1,7 @@
 import { expect, use } from 'chai'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
-import { LibraryTest, LibraryTest__factory } from '../../typechain'
+import { LibraryTest } from '../../typechain-types'
 
 use(solidity)
 
@@ -9,9 +9,7 @@ describe('LibraryTest', () => {
 	let libraryTest: LibraryTest
 
 	before(async () => {
-		const libraryTestFactory = (await ethers.getContractFactory(
-			'LibraryTest'
-		)) as LibraryTest__factory
+		const libraryTestFactory = await ethers.getContractFactory('LibraryTest')
 		libraryTest = await libraryTestFactory.deploy()
 	})
 
