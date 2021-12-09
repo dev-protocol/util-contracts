@@ -2,7 +2,7 @@ import { expect, use } from 'chai'
 import { constants, Signer, utils } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
-import { EternalStorage, EternalStorage__factory } from '../../typechain'
+import { EternalStorage } from '../../typechain-types'
 
 use(solidity)
 
@@ -20,9 +20,9 @@ describe('EternalStorage', () => {
 	beforeEach(async () => {
 		;[, user, test] = await ethers.getSigners()
 
-		const eternalStorageFactory = (await ethers.getContractFactory(
+		const eternalStorageFactory = await ethers.getContractFactory(
 			'EternalStorage'
-		)) as EternalStorage__factory
+		)
 		eternalStorage = await eternalStorageFactory.deploy()
 		eternalStorageOther = eternalStorage.connect(user)
 	})

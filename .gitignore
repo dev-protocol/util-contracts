@@ -62,7 +62,7 @@ typings/
 .next
 
 # output of typechain
-typechain
+typechain-types
 build
 types
 

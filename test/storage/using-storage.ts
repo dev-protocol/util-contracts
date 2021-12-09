@@ -2,7 +2,7 @@ import { expect, use } from 'chai'
 import { Signer, utils } from 'ethers'
 import { solidity } from 'ethereum-waffle'
 import { ethers } from 'hardhat'
-import { UsingStorageTest, UsingStorageTest__factory } from '../../typechain'
+import { UsingStorageTest } from '../../typechain-types'
 
 use(solidity)
 
@@ -15,9 +15,9 @@ describe('UsingStorage', () => {
 	beforeEach(async () => {
 		;[deployer, newAdmin, user] = await ethers.getSigners()
 
-		const usingStorageFactory = (await ethers.getContractFactory(
+		const usingStorageFactory = await ethers.getContractFactory(
 			'UsingStorageTest'
-		)) as UsingStorageTest__factory
+		)
 		usingStorage = await usingStorageFactory.deploy()
 	})
 
@@ -165,9 +165,9 @@ describe('UsingStorage', () => {
 			await usingStorage.createStorage()
 			await usingStorage.setUInt(1)
 
-			const usingStorageNextFact = (await ethers.getContractFactory(
+			const usingStorageNextFact = await ethers.getContractFactory(
 				'UsingStorageTest'
-			)) as UsingStorageTest__factory
+			)
 			usingStorageNext = await usingStorageNextFact.deploy()
 		})
 
