@@ -26,7 +26,7 @@
 	"author": "",
 	"license": "MPL-2.0",
 	"devDependencies": {
-		"@devprotocol/protocol": "3.4.0",
+		"@devprotocol/protocol": "3.4.1",
 		"@nomiclabs/hardhat-ethers": "2.0.5",
 		"@nomiclabs/hardhat-waffle": "2.0.3",
 		"@typechain/ethers-v5": "9.0.0",

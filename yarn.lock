@@ -35,6 +35,14 @@
   dependencies:
     "@cspotcode/source-map-consumer" "0.8.0"
 
+"@devprotocol/i-s-tokens@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@devprotocol/i-s-tokens/-/i-s-tokens-1.7.0.tgz#a225f3fd8d4ec883f2e45420a41b974f94006bcb"
+  integrity sha512-dG7EmAD2qjaqX1nbdt6tSNALhlYMv9AomDnGgnaQ4pVbebhWbD1NxfgPGBrHnRClfJx0195Bh/EJXEeum5L4Eg==
+  dependencies:
+    ethereum-waffle "3.4.0"
+    solhint "3.3.7"
+
 "@devprotocol/protocol-v2@0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@devprotocol/protocol-v2/-/protocol-v2-0.5.0.tgz#5174ebb31fa13ffcd22d2fe39ebada56b3c4d858"
@@ -44,11 +52,12 @@
     "@openzeppelin/contracts" "4.3.2"
     "@openzeppelin/contracts-upgradeable" "4.3.2"
 
-"@devprotocol/protocol@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@devprotocol/protocol/-/protocol-3.4.0.tgz#df746e7b82d1aed18d51b146fea62b50e1a6bbc8"
-  integrity sha512-LRQrpT078PavgqxD584QWpALCr9BgX1abttGTOe0gUZsRnT5JSruxp6Bs4k5yfaAD3XRdkf/SR2+YLPwah0QYQ==
+"@devprotocol/protocol@3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@devprotocol/protocol/-/protocol-3.4.1.tgz#a3021dd395c68679244cf4948e22bef179ef2e19"
+  integrity sha512-0vl90eidbl1nQIY89M+yz6by2Ygq6RHJxwX6ssP0+tOfDhnNBJYHdJHbXGTjAiKj+qnyGiYByEp8tgd763L+PA==
   dependencies:
+    "@devprotocol/i-s-tokens" "1.7.0"
     "@openzeppelin/contracts" "2.5.1"
 
 "@devprotocol/util-contracts@3.3.0":
